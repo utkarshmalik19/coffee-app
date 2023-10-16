@@ -1,6 +1,9 @@
+import 'package:coffee_app/utils/consts.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatelessWidget {
+  const ProfilePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     // Sample user data for demonstration purposes
@@ -15,42 +18,48 @@ class ProfilePage extends StatelessWidget {
     );
 
     return Scaffold(
+      backgroundColor: AppConstants.bgColor,
       appBar: AppBar(
-        title: Text('Profile'),
+        elevation: 0,
+        backgroundColor: AppConstants.bgColor,
+        title: Text('Profile', style: AppConstants.headerTextStyle,),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             CircleAvatar(
+              backgroundColor: AppConstants.orange,
               radius: 80,
               backgroundImage: AssetImage(user.image),
             ),
-            SizedBox(height: 16),
-            Text(
-              user.name,
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            Padding(
+              padding: const EdgeInsets.only(top: 16, bottom: 8),
+              child: Text(
+                user.name,
+                style: AppConstants.headerTextStyle,
+              ),
             ),
-            SizedBox(height: 8),
             Text(
               'Age: ${user.age}',
-              style: TextStyle(fontSize: 18),
+              style: AppConstants.smallTextStyle,
             ),
-            SizedBox(height: 8),
-            Text(
-              'Gender: ${user.gender}',
-              style: TextStyle(fontSize: 18),
+            Padding(
+              padding: const EdgeInsets.only(top: 8, bottom: 8),
+              child: Text(
+                'Gender: ${user.gender}',
+                style: AppConstants.smallTextStyle,
+              ),
             ),
-            SizedBox(height: 8),
             Text(
               'Email: ${user.email}',
-              style: TextStyle(fontSize: 18),
+              style: AppConstants.smallTextStyle,
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(
               'Favorite Coffee: ${user.favoriteCoffee}',
-              style: TextStyle(fontSize: 18),
+              style: AppConstants.smallTextStyle,
             ),
           ],
         ),

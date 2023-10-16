@@ -1,4 +1,5 @@
 
+import 'package:coffee_app/utils/consts.dart';
 import 'package:flutter/material.dart';
 
 class CartItemTile extends StatelessWidget {
@@ -19,33 +20,34 @@ class CartItemTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      contentPadding: EdgeInsets.symmetric(horizontal: 8,vertical: 16),
-      tileColor: Colors.white30,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 8,vertical: 16),
+      tileColor: AppConstants.orange,
       leading: Image.asset(
         image,
         width: 60,
         height: 60,
         fit: BoxFit.cover,
       ),
-      title: Text(name),
+      title: Text(name, style: const TextStyle(color: AppConstants.darkBrown),),
       subtitle: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-        Text(description),
+        Text(description, style: const TextStyle(color: AppConstants.brown),),
         Row(
           children: [
-            Icon(Icons.watch),
+            const Icon(Icons.watch, color: AppConstants.brown,),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 6),
-              child: Text("$time min"),
+              child: Text("$time min", style: const TextStyle(color: AppConstants.brown),),
             ),
-            Icon(Icons.star, color: Colors.amber,),
-            Text("$rating"),
+            const Icon(Icons.star, color: Colors.amber,),
+            Text("$rating", style: const TextStyle(color: AppConstants.brown),),
           ],
         )
       ],),
       trailing: IconButton(
-        icon: Icon(Icons.clear),
+        icon: const Icon(Icons.clear, color: AppConstants.brown,),
         onPressed: onRemove,
       ),
     );

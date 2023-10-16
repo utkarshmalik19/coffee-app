@@ -14,14 +14,14 @@ class CartPage extends StatelessWidget {
         backgroundColor: AppConstants.bgColor,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: AppConstants.brown),
+          icon: Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
         title: Text(
           'Cart',
-          style: TextStyle(color: AppConstants.brown),
+          style: TextStyle(color: Colors.white),
         ),
       ),
       body: Column(
@@ -31,7 +31,7 @@ class CartPage extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             child: Text(
               'Orders',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: AppConstants.headerTextStyle,
             ),
           ),
           Expanded(
@@ -40,7 +40,8 @@ class CartPage extends StatelessWidget {
                   5, // Replace this with the actual number of items in the cart
               itemBuilder: (context, index) {
                 return Padding(
-                  padding: const EdgeInsets.only(bottom: 12),
+                  padding:
+                      const EdgeInsets.only(bottom: 12, left: 10, right: 16),
                   child: CartItemTile(
                     image:
                         'assets/images/coffee.png', // Replace this with the actual image URL or asset path
@@ -61,7 +62,7 @@ class CartPage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: CustomButton(
-                buttonText: 'Payment',
+                buttonText: 'Place Order',
                 onPressed: () {
                   Navigator.of(context).pushNamed('/payments');
                 },

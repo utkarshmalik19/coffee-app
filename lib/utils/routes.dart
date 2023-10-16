@@ -17,22 +17,22 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const HomeScreen());
 
       case '/home':
-        return CupertinoPageRoute(
+        return MaterialPageRoute(
           builder: (_) => const HomeScreen(
               //data: args,   for passing data
               ),
         );
 
       case '/item_details':
-        return CupertinoPageRoute(
+        return MaterialPageRoute(
           builder: (_) => ItemDetailsPage(),
         );
         case '/cart_page':
-        return CupertinoPageRoute(
+        return MaterialPageRoute(
           builder: (_) => CartPage(),
         );
         case '/payments':
-        return CupertinoPageRoute(
+        return MaterialPageRoute(
           builder: (_) => PaymentsPage(),
         );
         case '/profile':

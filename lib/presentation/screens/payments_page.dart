@@ -3,6 +3,8 @@ import 'package:coffee_app/utils/consts.dart';
 import 'package:flutter/material.dart';
 
 class PaymentsPage extends StatelessWidget {
+  const PaymentsPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     // Dummy data for demonstration purposes
@@ -15,16 +17,23 @@ class PaymentsPage extends StatelessWidget {
     final double totalAmount = items.fold(0, (sum, item) => sum + item.price);
 
     return Scaffold(
+      backgroundColor: AppConstants.bgColor,
       appBar: AppBar(
-        backgroundColor: Color(0xfffffcfc),
+        backgroundColor: AppConstants.bgColor,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back,color: AppConstants.brown,),
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
-        title: Text('Wallet', style: TextStyle(color: AppConstants.brown),),
+        title: const Text(
+          'Wallet',
+          style: TextStyle(color: Colors.white),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -42,39 +51,51 @@ class PaymentsPage extends StatelessWidget {
                     padding: const EdgeInsets.all(16.0),
                     child: Text(
                       'Your total is \n\$${totalAmount.toStringAsFixed(1)}',
-                      style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: AppConstants.darkBrown),
                     ),
                   ),
                 ),
               ),
             ),
-            SizedBox(height: 16),
-            Text(
-              'Order Details',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            Padding(
+              padding: const EdgeInsets.only(top: 16, bottom: 8),
+              child: Text(
+                'Order Details',
+                style: AppConstants.headerTextStyle,
+              ),
             ),
-            SizedBox(height: 8),
             Expanded(
               child: ListView.builder(
-                itemCount: items.length+1,
+                itemCount: items.length + 1,
                 itemBuilder: (context, index) {
-                  return index != items.length ?Row(
-                    children: [
-                      Text(items[index].name),
-                      SizedBox(
-                        width: 140,
-                      ),
-                      Text("500")
-                    ],
-                  ): Row(
-                    children: [
-                      Text("Total"),
-                      SizedBox(
-                        width: 140,
-                      ),
-                      Text("1000")
-                    ],
-                  );
+                  return index != items.length
+                      ? Row(
+                          children: [
+                            Text(
+                              items[index].name,
+                              style: AppConstants.smallTextStyle,
+                            ),
+                            SizedBox(
+                              width: 140,
+                            ),
+                            Text(
+                              "500",
+                              style: AppConstants.smallTextStyle,
+                            )
+                          ],
+                        )
+                      : Row(
+                          children: [
+                            Text("Total"),
+                            SizedBox(
+                              width: 140,
+                            ),
+                            Text("1000")
+                          ],
+                        );
                 },
               ),
             ),

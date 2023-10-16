@@ -1,7 +1,3 @@
-
-import 'package:coffee_app/presentation/screens/cart_page.dart';
-import 'package:coffee_app/presentation/screens/home_screen.dart';
-import 'package:coffee_app/presentation/screens/profile_page.dart';
 import 'package:coffee_app/utils/consts.dart';
 import 'package:flutter/material.dart';
 
@@ -13,57 +9,49 @@ class BottomNavBar extends StatefulWidget {
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
-      var _currentIndex = 0;
-      List<Widget> navBarPages = [HomeScreen(), CartPage(), ProfilePage()];
+  var _currentIndex = 0;
+
+  List<String> pages = ['/home','/cart_page','/profile'];
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
       child: Theme(
-
-          data: Theme.of(context).copyWith(
-            // Change the selected item color here
-            bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-              selectedItemColor: AppConstants.orange,
-              
-              unselectedItemColor: Colors.white,
-              
-            ),
-          ),
-          child: BottomNavigationBar(
-            
-            iconSize: 30,
-            backgroundColor: AppConstants.bgColor,
-            currentIndex: _currentIndex,
-            onTap: (index) {
-              // Handle tab selection here
-              Navigator.of(context).pushNamed(
-                    '/cart_page',
-                  );
-              setState(() {
-                _currentIndex = index;
-              });
-            },
-            items: [
-              BottomNavigationBarItem(
-                
-                icon: Icon(Icons.home),
-                label: 'Home',
-              ),
-              BottomNavigationBarItem(
-                
-                icon: Icon(Icons.shopping_cart),
-                label: 'Cart',
-              ),
-              BottomNavigationBarItem(
-                
-                icon: Icon(Icons.person),
-                label: 'Profile' ,
-              ),
-            ],
+        data: Theme.of(context).copyWith(
+          // Change the selected item color here
+          bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+            selectedItemColor: AppConstants.orange,
+            unselectedItemColor: Colors.white,
           ),
         ),
+        child: BottomNavigationBar(
+          iconSize: 30,
+          backgroundColor: AppConstants.bgColor,
+          currentIndex: _currentIndex,
+          onTap: (index) {
+            // Handle tab selection here
+            Navigator.of(context).pushNamed(pages[index]);
+            setState(() {
+              _currentIndex = index;
+            });
+          },
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.shopping_cart),
+              label: 'Cart',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              label: 'Profile',
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
