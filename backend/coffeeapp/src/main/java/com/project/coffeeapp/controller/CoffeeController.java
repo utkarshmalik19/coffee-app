@@ -17,34 +17,40 @@ import com.project.coffeeapp.services.CoffeeServices;
 
 @RestController
 public class CoffeeController {
-private CoffeeServices coffeeServices;
+	private CoffeeServices coffeeServices;
+
 	public CoffeeController(CoffeeServices coffeServices) {
-	this.coffeeServices = coffeServices;
-}
-	@PostMapping("/add")
-	public ResponseEntity<String> addCoffee(@RequestBody Coffee coffee){
+		this.coffeeServices = coffeServices;
+	}
+
+	@PostMapping("/coffee/add")
+	public ResponseEntity<String> addCoffee(@RequestBody Coffee coffee) {
 		coffeeServices.addCoffee(coffee);
 		return ResponseEntity.status(HttpStatus.CREATED).body("{\"message\": \"Coffee Added\"}");
 	}
-	@GetMapping("/all")
+
+	@GetMapping("/coffee/all")
 	public ResponseEntity<List<Coffee>> getAllCoffee() {
 		List<Coffee> allCoffee = coffeeServices.getAllCoffee();
 		return ResponseEntity.ok(allCoffee);
 	}
-	 @GetMapping("/search")
-	    public ResponseEntity<List<Coffee>> searchCoffee(@RequestParam(name = "searchValue", required = false) String searchValue) {
-	        List<Coffee> searchedCoffee;
-	        if (searchValue != null && !searchValue.trim().isEmpty()) {
-	            searchedCoffee = coffeeServices.searchCoffee(searchValue);
-	        } else {
-	            // If searchValue is not provided or empty, return all coffee.
-	            searchedCoffee = coffeeServices.getAllCoffee();
-	        }
-	        return ResponseEntity.ok(searchedCoffee);
-	    }
-	 @PostMapping("/order")
-	 public ResponseEntity<String> getCoffeeOrder(){
-		 
-		 return ResponseEntity.status(HttpStatus.CREATED).body("{\"message\": \"Coffee Ordered\"}");
-	 }
+
+	@GetMapping("/coffee/search")
+	public ResponseEntity<List<Coffee>> searchCoffee(
+			@RequestParam(name = "searchValue", required = false) String searchValue) {
+		List<Coffee> searchedCoffee;
+		if (searchValue != null && !searchValue.trim().isEmpty()) {
+			searchedCoffee = coffeeServices.searchCoffee(searchValue);
+		} else {
+			// If searchValue is not provided or empty, return all coffee.
+			searchedCoffee = coffeeServices.getAllCoffee();
+		}
+		return ResponseEntity.ok(searchedCoffee);
+	}
+
+	@PostMapping("/coffee/order")
+	public ResponseEntity<String> getCoffeeOrder() {
+
+		return ResponseEntity.status(HttpStatus.CREATED).body("{\"message\": \"Coffee Ordered\"}");
+	}
 }
