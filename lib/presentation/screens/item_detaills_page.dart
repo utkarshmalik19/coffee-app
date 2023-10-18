@@ -1,20 +1,25 @@
+import 'package:coffee_app/models/coffee.dart';
 import 'package:coffee_app/presentation/widgets/bottom_navbar.dart';
 import 'package:coffee_app/presentation/widgets/custom_button.dart';
 import 'package:coffee_app/presentation/widgets/custom_scaffold.dart';
+import 'package:coffee_app/services/coffee_api.dart';
 import 'package:coffee_app/utils/consts.dart';
 import 'package:flutter/material.dart';
 
 class ItemDetailsPage extends StatefulWidget {
-  const ItemDetailsPage({super.key});
+  final Object? index;
+  const ItemDetailsPage({super.key, required this.index});
 
   @override
   _ItemDetailsPageState createState() => _ItemDetailsPageState();
 }
 
 class _ItemDetailsPageState extends State<ItemDetailsPage> {
+  
   int quantity = 1;
   String selectedSize = 'Small';
   List<String> selectedToppings = [];
+  List<Coffee> coffeeList = [];
 
   void _incrementQuantity() {
     setState(() {
@@ -45,9 +50,26 @@ class _ItemDetailsPageState extends State<ItemDetailsPage> {
       }
     });
   }
-
+  getCoffeeDetails() async{
+   try{
+    List<Coffee> data =  await CoffeeApiService.getAllCoffee();;
+     setState(() {
+       coffeeList = data;
+    });
+   }catch(e){
+    print('Error fetching coffee: $e');
+   }
+   
+}
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getCoffeeDetails();
+  }
   @override
   Widget build(BuildContext context) {
+    int itemIndex = widget.index as int; 
     return CustomScaffold(
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20.0),
@@ -66,10 +88,11 @@ class _ItemDetailsPageState extends State<ItemDetailsPage> {
             
             Row(
               children: [
-                Text(
-                  'Pumpkin Latte',
+                coffeeList.length>1 ? Text(   
+                  coffeeList[itemIndex].name,
                   style: AppConstants.headerTextStyle,
-                ),
+                ): Text('No'),
+  
                 const Spacer(),
                 IconButton(
                   icon: Icon(
@@ -130,12 +153,12 @@ class _ItemDetailsPageState extends State<ItemDetailsPage> {
             Text(
               'Description',
               style: AppConstants.bigTextStyle,
-            ),
+            ) ,
             const SizedBox(height: 8),
-            Text(
-              'Lorem ipsum dolor sit amet, consectetur adipiscing elit lorem ipusm sum.',
+           coffeeList.length>1 ? Text(
+              coffeeList[itemIndex].description,
               style: AppConstants.smallTextStyle,
-            ),
+            ): Text('Nope'),
             const SizedBox(height: 16),
             Text(
               'Add Toppings',

@@ -5,7 +5,7 @@ class ItemCard extends StatelessWidget {
   final String image;
   final String name;
   final double rating;
-  final double price;
+  final int price;
   final VoidCallback onPressed;
 
   const ItemCard({

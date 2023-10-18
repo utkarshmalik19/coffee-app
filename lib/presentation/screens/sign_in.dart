@@ -1,5 +1,6 @@
 import 'package:coffee_app/presentation/widgets/custom_button.dart';
 import 'package:coffee_app/presentation/widgets/custom_scaffold.dart';
+import 'package:coffee_app/services/coffee_api.dart';
 import 'package:coffee_app/utils/consts.dart';
 import 'package:flutter/material.dart';
 
@@ -53,6 +54,7 @@ class SignIn extends StatelessWidget {
             SizedBox(height: 16.0),
             GestureDetector(
               onTap: () {
+                CoffeeApiService.searchCoffee();
                 // Handle Forgot Password
               },
               child: Text(
