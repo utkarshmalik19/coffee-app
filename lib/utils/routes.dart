@@ -1,3 +1,4 @@
+import 'package:coffee_app/models/order_details.dart';
 import 'package:coffee_app/presentation/screens/cart_page.dart';
 import 'package:coffee_app/presentation/screens/home_screen.dart';
 import 'package:coffee_app/presentation/screens/item_detaills_page.dart';
@@ -11,7 +12,8 @@ class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     // Getting arguments passed in while calling Navigator.pushNamed
     final args = settings.arguments;
-
+    
+    //final orderArgs = ModalRoute.of(context)!.settings.arguments as OrderDetails;
     switch (settings.name) {
       case '/':
         return MaterialPageRoute(builder: (_) => const HomeScreen());
@@ -29,7 +31,7 @@ class RouteGenerator {
         );
         case '/cart_page':
         return MaterialPageRoute(
-          builder: (_) => CartPage(),
+          builder: (_) => CartPage(order: args,),
         );
         case '/payments':
         return MaterialPageRoute(

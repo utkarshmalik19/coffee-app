@@ -13,24 +13,18 @@ class CoffeeApiService {
       List<dynamic> coffeeData = jsonDecode(response.body);
       List<Coffee> coffeeList =
           coffeeData.map((json) => Coffee.fromJson(json)).toList();
-      for (Coffee coffee in coffeeList) {
-        print('Coffee Name: ${coffee.name}');
-        print('Price: ${coffee.price}');
-      }
       return coffeeList;
     } else {
       throw Exception('Failed to get coffee');
     }
   }
-
+//Here get coffee only of a certain type
   static Future<List<Coffee>> getAllCoffee() async {
     final response = await http.get(Uri.parse('$baseUri/coffee/all'));
     List<dynamic> coffeeData = jsonDecode(response.body);
     List<Coffee> allCoffee =
         coffeeData.map((json) => Coffee.fromJson(json)).toList();
-        for(var coffee in allCoffee){
-          print(coffee.name);
-        }
+
     return allCoffee;
   }
 }

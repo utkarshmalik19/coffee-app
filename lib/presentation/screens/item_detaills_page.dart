@@ -1,4 +1,5 @@
 import 'package:coffee_app/models/coffee.dart';
+import 'package:coffee_app/models/order_details.dart';
 import 'package:coffee_app/presentation/widgets/bottom_navbar.dart';
 import 'package:coffee_app/presentation/widgets/custom_button.dart';
 import 'package:coffee_app/presentation/widgets/custom_scaffold.dart';
@@ -15,7 +16,6 @@ class ItemDetailsPage extends StatefulWidget {
 }
 
 class _ItemDetailsPageState extends State<ItemDetailsPage> {
-  
   int quantity = 1;
   String selectedSize = 'Small';
   List<String> selectedToppings = [];
@@ -50,26 +50,28 @@ class _ItemDetailsPageState extends State<ItemDetailsPage> {
       }
     });
   }
-  getCoffeeDetails() async{
-   try{
-    List<Coffee> data =  await CoffeeApiService.getAllCoffee();;
-     setState(() {
-       coffeeList = data;
-    });
-   }catch(e){
-    print('Error fetching coffee: $e');
-   }
-   
-}
-@override
+
+  getCoffeeDetails() async {
+    try {
+      List<Coffee> data = await CoffeeApiService.getAllCoffee();
+      
+      setState(() {
+        coffeeList = data;
+      });
+    } catch (e) {
+      print('Error fetching coffee: $e');
+    }
+  }
+
+  @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getCoffeeDetails();
   }
+
   @override
   Widget build(BuildContext context) {
-    int itemIndex = widget.index as int; 
+    int itemIndex = widget.index as int;
     return CustomScaffold(
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20.0),
@@ -85,17 +87,18 @@ class _ItemDetailsPageState extends State<ItemDetailsPage> {
                 fit: BoxFit.cover,
               ),
             ),
-            
             Row(
               children: [
-                coffeeList.length>1 ? Text(   
-                  coffeeList[itemIndex].name,
-                  style: AppConstants.headerTextStyle,
-                ): Text('No'),
-  
+                coffeeList.length > 1
+                    ? Text(
+                        coffeeList[itemIndex].name,
+                        style: AppConstants.headerTextStyle,
+                        //Write better error handling
+                      )
+                    : const Text('Error in title'),
                 const Spacer(),
                 IconButton(
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.remove,
                     color: AppConstants.orange,
                   ),
@@ -103,7 +106,7 @@ class _ItemDetailsPageState extends State<ItemDetailsPage> {
                 ),
                 Text(
                   '$quantity',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 18,
                     color: Colors.white,
                   ),
@@ -131,7 +134,10 @@ class _ItemDetailsPageState extends State<ItemDetailsPage> {
                   groupValue: selectedSize,
                   onChanged: _onSizeSelected,
                 ),
-                const Text('Small', style: TextStyle(color: Colors.white),),
+                const Text(
+                  'Small',
+                  style: TextStyle(color: Colors.white),
+                ),
                 Radio<String>(
                   value: 'Medium',
                   activeColor: AppConstants.orange,
@@ -142,7 +148,6 @@ class _ItemDetailsPageState extends State<ItemDetailsPage> {
                 Radio<String>(
                   value: 'Large',
                   activeColor: AppConstants.orange,
-                  
                   groupValue: selectedSize,
                   onChanged: _onSizeSelected,
                 ),
@@ -153,12 +158,14 @@ class _ItemDetailsPageState extends State<ItemDetailsPage> {
             Text(
               'Description',
               style: AppConstants.bigTextStyle,
-            ) ,
+            ),
             const SizedBox(height: 8),
-           coffeeList.length>1 ? Text(
-              coffeeList[itemIndex].description,
-              style: AppConstants.smallTextStyle,
-            ): Text('Nope'),
+            coffeeList.length > 1
+                ? Text(
+                    coffeeList[itemIndex].description,
+                    style: AppConstants.smallTextStyle,
+                  )
+                : const Text('Error in description'),
             const SizedBox(height: 16),
             Text(
               'Add Toppings',
@@ -167,7 +174,10 @@ class _ItemDetailsPageState extends State<ItemDetailsPage> {
             const SizedBox(height: 8),
             CheckboxListTile(
               activeColor: AppConstants.orange,
-              title: Text('Topping 1', style: AppConstants.smallTextStyle,),
+              title: Text(
+                'Topping 1',
+                style: AppConstants.smallTextStyle,
+              ),
               value: selectedToppings.contains('Topping 1'),
               onChanged: (selected) =>
                   _onToppingSelected('Topping 1', selected ?? false),
@@ -181,20 +191,23 @@ class _ItemDetailsPageState extends State<ItemDetailsPage> {
             ),
             CheckboxListTile(
               activeColor: AppConstants.orange,
-              
               title: Text('Topping 3', style: AppConstants.smallTextStyle),
               value: selectedToppings.contains('Topping 3'),
               onChanged: (selected) =>
                   _onToppingSelected('Topping 3', selected ?? false),
             ),
-            
             Padding(
               padding: const EdgeInsets.only(left: 16, top: 16),
               child: CustomButton(
                 onPressed: () {
                   // Add to Cart logic
-
-                  Navigator.pushNamed(context, '/cart_page');
+                  OrderDetails? order;
+                  setState(() {
+                     order = OrderDetails(id: 1, quantity: quantity, size: selectedSize, toppings: selectedToppings);
+                  });
+                 if(order is OrderDetails){
+                   Navigator.pushNamed(context, '/cart_page', arguments: order);
+                 }
                   print('Add to Cart');
                 },
                 buttonText: 'Add to Cart',

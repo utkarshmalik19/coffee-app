@@ -1,10 +1,12 @@
+import 'package:coffee_app/models/order_details.dart';
 import 'package:coffee_app/presentation/widgets/cart_item_tile.dart';
 import 'package:coffee_app/presentation/widgets/custom_button.dart';
 import 'package:coffee_app/utils/consts.dart';
 import 'package:flutter/material.dart';
 
 class CartPage extends StatelessWidget {
-  const CartPage({super.key});
+  final Object? order;
+  const CartPage({super.key, required this.order});
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +41,7 @@ class CartPage extends StatelessWidget {
               itemCount:
                   5, // Replace this with the actual number of items in the cart
               itemBuilder: (context, index) {
+                var myOrder =  order as OrderDetails;
                 return Padding(
                   padding:
                       const EdgeInsets.only(bottom: 12, left: 10, right: 16),
@@ -46,7 +49,7 @@ class CartPage extends StatelessWidget {
                     image:
                         'assets/images/coffee.png', // Replace this with the actual image URL or asset path
                     name:
-                        'Black Coffee  $index', // Replace this with the actual coffee name
+                        myOrder!.size, // Replace this with the actual coffee name
                     time: 30,
                     rating: 4,
                     description:
