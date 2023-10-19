@@ -38,4 +38,10 @@ CoffeeRepository coffeeRepository;
 		return coffeeRepository.findAll();
 	}
 
+	@Override
+	public Coffee getCoffeeById(int orderId) {
+		return coffeeRepository.getCoffeeByProductId(orderId);
+		
+	}
+
 }

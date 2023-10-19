@@ -27,4 +27,13 @@ class CoffeeApiService {
 
     return allCoffee;
   }
+
+  // Get coffee by id
+  static Future<Coffee> getCoffeeById(int id) async{
+    final response = await http.get(Uri.parse('$baseUri/coffee/coffeebyid/$id'));
+    //List<dynamic> data = jsonDecode(response.body);
+    Coffee coffee = Coffee.fromJson(jsonDecode(response.body));
+    print(coffee.name);
+    return coffee;
+  }
 }

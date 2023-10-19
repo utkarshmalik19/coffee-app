@@ -5,7 +5,6 @@ import 'package:coffee_app/presentation/screens/item_detaills_page.dart';
 import 'package:coffee_app/presentation/screens/payments_page.dart';
 import 'package:coffee_app/presentation/screens/profile_page.dart';
 import 'package:coffee_app/presentation/screens/sign_up.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class RouteGenerator {

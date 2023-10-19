@@ -16,6 +16,7 @@ class ItemDetailsPage extends StatefulWidget {
 }
 
 class _ItemDetailsPageState extends State<ItemDetailsPage> {
+  String coffeeName = 'a';
   int quantity = 1;
   String selectedSize = 'Small';
   List<String> selectedToppings = [];
@@ -62,11 +63,23 @@ class _ItemDetailsPageState extends State<ItemDetailsPage> {
       print('Error fetching coffee: $e');
     }
   }
+   getItemName() async{
+    int id = widget.index as int;
+    try{
+      Coffee data = await CoffeeApiService.getCoffeeById(id);
+      setState(() {
+        coffeeName = data.name;
+      });
+    }catch(e){
+
+    }
+  }
 
   @override
   void initState() {
     super.initState();
     getCoffeeDetails();
+    getItemName();
   }
 
   @override
@@ -78,6 +91,7 @@ class _ItemDetailsPageState extends State<ItemDetailsPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Text('This is name $coffeeName'),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 16),
               child: Image.asset(
@@ -203,7 +217,7 @@ class _ItemDetailsPageState extends State<ItemDetailsPage> {
                   // Add to Cart logic
                   OrderDetails? order;
                   setState(() {
-                     order = OrderDetails(id: 1, quantity: quantity, size: selectedSize, toppings: selectedToppings);
+                     order = OrderDetails( id: itemIndex, quantity: quantity, size: selectedSize, toppings: selectedToppings, name: 'hello');
                   });
                  if(order is OrderDetails){
                    Navigator.pushNamed(context, '/cart_page', arguments: order);

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,6 +34,13 @@ public class CoffeeController {
 	public ResponseEntity<List<Coffee>> getAllCoffee() {
 		List<Coffee> allCoffee = coffeeServices.getAllCoffee();
 		return ResponseEntity.ok(allCoffee);
+	}
+	
+	@GetMapping("/coffee/coffeebyid/{id}")
+	public ResponseEntity<Coffee> getCoffeeById(@PathVariable int id){
+		Coffee coffee = coffeeServices.getCoffeeById(id);
+		System.out.println(coffee.getName());
+		return ResponseEntity.ok(coffee);
 	}
 
 	@GetMapping("/coffee/search")
