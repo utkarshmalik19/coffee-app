@@ -1,4 +1,5 @@
 import 'package:coffee_app/models/coffee.dart';
+import 'package:coffee_app/models/coffee_item.dart';
 import 'package:coffee_app/services/coffee_api.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -27,7 +28,6 @@ class _TabBarPageState extends State<TabBarPage> {
 }
 @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getCoffee();
   }
@@ -40,10 +40,11 @@ class _TabBarPageState extends State<TabBarPage> {
       itemBuilder: (context, index) {
         return GestureDetector(
           onTap: (){
+            final coffeeItem = CoffeeItem(index, coffeList[index].name);
             print('index is $index');
             Navigator.of(context).pushNamed(
                   '/item_details',
-                  arguments: index
+                  arguments: coffeeItem
                 );
           },
           child: Padding(

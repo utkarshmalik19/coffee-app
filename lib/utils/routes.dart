@@ -26,7 +26,7 @@ class RouteGenerator {
 
       case '/item_details':
         return MaterialPageRoute(
-          builder: (_) => ItemDetailsPage(index: args,),
+          builder: (_) => ItemDetailsPage(coffeeItem: args,),
         );
         case '/cart_page':
         return MaterialPageRoute(

@@ -26,7 +26,6 @@ class _CartPageState extends State<CartPage> {
 
   getItemName() async {
     OrderDetails myOrder = widget.order as OrderDetails;
-    int id = myOrder.id;
     String name = myOrder.name;
 
     try {
@@ -40,9 +39,9 @@ class _CartPageState extends State<CartPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getItemName();
+    addItemsToCart();
   }
 
   @override
@@ -76,7 +75,7 @@ class _CartPageState extends State<CartPage> {
           Expanded(
             child: ListView.builder(
               itemCount:
-                  5, // Replace this with the actual number of items in the cart
+                  item.length, // Replace this with the actual number of items in the cart
               itemBuilder: (context, index) {
                 var myOrder = widget.order as OrderDetails;
                 return Padding(
@@ -86,7 +85,7 @@ class _CartPageState extends State<CartPage> {
                     image:
                         'assets/images/coffee.png', // Replace this with the actual image URL or asset path
                     name: myOrder
-                        .size, // Replace this with the actual coffee name
+                        .name, // Replace this with the actual coffee name
                     time: 30,
                     rating: 4,
                     description:

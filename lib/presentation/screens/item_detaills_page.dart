@@ -1,4 +1,5 @@
 import 'package:coffee_app/models/coffee.dart';
+import 'package:coffee_app/models/coffee_item.dart';
 import 'package:coffee_app/models/order_details.dart';
 import 'package:coffee_app/presentation/widgets/bottom_navbar.dart';
 import 'package:coffee_app/presentation/widgets/custom_button.dart';
@@ -8,8 +9,8 @@ import 'package:coffee_app/utils/consts.dart';
 import 'package:flutter/material.dart';
 
 class ItemDetailsPage extends StatefulWidget {
-  final Object? index;
-  const ItemDetailsPage({super.key, required this.index});
+  final Object? coffeeItem;
+  const ItemDetailsPage({super.key, required this.coffeeItem});
 
   @override
   _ItemDetailsPageState createState() => _ItemDetailsPageState();
@@ -74,8 +75,23 @@ class _ItemDetailsPageState extends State<ItemDetailsPage> {
 
   @override
   Widget build(BuildContext context) {
-    int itemIndex = widget.index as int;
-    return CustomScaffold(
+    CoffeeItem coffeeItems = widget.coffeeItem as CoffeeItem;
+    return Scaffold(
+      backgroundColor: AppConstants.bgColor,
+       appBar: AppBar(
+        backgroundColor: AppConstants.bgColor,
+        elevation: 0,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        title: const Text(
+          'Cart',
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20.0),
         child: Column(
@@ -95,7 +111,7 @@ class _ItemDetailsPageState extends State<ItemDetailsPage> {
               children: [
                 coffeeList.length > 1
                     ? Text(
-                        coffeeList[itemIndex].name,
+                        coffeeList[coffeeItems.id].name,
                         style: AppConstants.headerTextStyle,
                         //Write better error handling
                       )
@@ -116,7 +132,7 @@ class _ItemDetailsPageState extends State<ItemDetailsPage> {
                   ),
                 ),
                 IconButton(
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.add,
                     color: AppConstants.orange,
                   ),
@@ -166,7 +182,7 @@ class _ItemDetailsPageState extends State<ItemDetailsPage> {
             const SizedBox(height: 8),
             coffeeList.length > 1
                 ? Text(
-                    coffeeList[itemIndex].description,
+                    coffeeList[coffeeItems.id].description,
                     style: AppConstants.smallTextStyle,
                   )
                 : const Text('Error in description'),
@@ -207,7 +223,7 @@ class _ItemDetailsPageState extends State<ItemDetailsPage> {
                   // Add to Cart logic
                   OrderDetails? order;
                   setState(() {
-                     order = OrderDetails( id: itemIndex, quantity: quantity, size: selectedSize, toppings: selectedToppings, name: 'Latte');
+                     order = OrderDetails( id: coffeeItems.id, quantity: quantity, size: selectedSize, toppings: selectedToppings, name: coffeeItems.name);
                   });
                  if(order is OrderDetails){
                    Navigator.pushNamed(context, '/cart_page', arguments: order);
@@ -221,7 +237,7 @@ class _ItemDetailsPageState extends State<ItemDetailsPage> {
           ],
         ),
       ),
-      bottomNavbar: const BottomNavBar(),
+      bottomNavigationBar: const BottomNavBar(),
     );
   }
 }
