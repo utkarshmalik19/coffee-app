@@ -8,6 +8,6 @@ import com.project.coffeeapp.pojo.Coffee;
 
 public interface CoffeeRepository extends JpaRepository<Coffee, Integer> {
     List<Coffee> findByNameContainingIgnoreCase(String searchValue);
-    Coffee getCoffeeByProductId(int productId);
+    Coffee getCoffeeByName(String name);
 
 }

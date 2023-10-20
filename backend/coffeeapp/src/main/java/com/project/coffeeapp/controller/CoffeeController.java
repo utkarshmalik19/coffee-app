@@ -36,9 +36,9 @@ public class CoffeeController {
 		return ResponseEntity.ok(allCoffee);
 	}
 	
-	@GetMapping("/coffee/coffeebyid/{id}")
-	public ResponseEntity<Coffee> getCoffeeById(@PathVariable int id){
-		Coffee coffee = coffeeServices.getCoffeeById(id);
+	@GetMapping("/coffee/coffeebyname/{name}")
+	public ResponseEntity<Coffee> getCoffeeById(@PathVariable String name){
+		Coffee coffee = coffeeServices.getCoffeeByName(name);
 		System.out.println(coffee.getName());
 		return ResponseEntity.ok(coffee);
 	}

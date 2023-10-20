@@ -29,8 +29,8 @@ class CoffeeApiService {
   }
 
   // Get coffee by id
-  static Future<Coffee> getCoffeeById(int id) async{
-    final response = await http.get(Uri.parse('$baseUri/coffee/coffeebyid/$id'));
+  static Future<Coffee> getCoffeeByName(String name) async{
+    final response = await http.get(Uri.parse('$baseUri/coffee/coffeebyname/$name'));
     //List<dynamic> data = jsonDecode(response.body);
     Coffee coffee = Coffee.fromJson(jsonDecode(response.body));
     print(coffee.name);

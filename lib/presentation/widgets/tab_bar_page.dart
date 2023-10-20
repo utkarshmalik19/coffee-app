@@ -16,7 +16,7 @@ class _TabBarPageState extends State<TabBarPage> {
 
   getCoffee() async{
    try{
-    List<Coffee> data =  await CoffeeApiService.getAllCoffee();;
+    List<Coffee> data =  await CoffeeApiService.getAllCoffee();
      setState(() {
        coffeList = data;
     });
@@ -40,6 +40,7 @@ class _TabBarPageState extends State<TabBarPage> {
       itemBuilder: (context, index) {
         return GestureDetector(
           onTap: (){
+            print('index is $index');
             Navigator.of(context).pushNamed(
                   '/item_details',
                   arguments: index

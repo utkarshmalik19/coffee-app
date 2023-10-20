@@ -39,8 +39,8 @@ CoffeeRepository coffeeRepository;
 	}
 
 	@Override
-	public Coffee getCoffeeById(int orderId) {
-		return coffeeRepository.getCoffeeByProductId(orderId);
+	public Coffee getCoffeeByName(String name) {
+		return coffeeRepository.getCoffeeByName(name);
 		
 	}
 

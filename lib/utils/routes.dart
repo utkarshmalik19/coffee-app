@@ -54,9 +54,9 @@ class RouteGenerator {
     return MaterialPageRoute(builder: (_) {
       return Scaffold(
         appBar: AppBar(
-          title: Text('Error'),
+          title: const Text('Error'),
         ),
-        body: Center(
+        body: const Center(
           child: Text('ERROR'),
         ),
       );

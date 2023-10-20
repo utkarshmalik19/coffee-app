@@ -8,5 +8,5 @@ public interface CoffeeServices {
 void addCoffee(Coffee coffee);
 List<Coffee> getAllCoffee();
 List<Coffee> searchCoffee(String searchValue);
-Coffee getCoffeeById(int orderId);
+Coffee getCoffeeByName(String name);
 }

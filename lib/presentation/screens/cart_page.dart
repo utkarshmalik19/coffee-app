@@ -1,6 +1,8 @@
+import 'package:coffee_app/models/coffee.dart';
 import 'package:coffee_app/models/order_details.dart';
 import 'package:coffee_app/presentation/widgets/cart_item_tile.dart';
 import 'package:coffee_app/presentation/widgets/custom_button.dart';
+import 'package:coffee_app/services/coffee_api.dart';
 import 'package:coffee_app/utils/consts.dart';
 import 'package:flutter/material.dart';
 
@@ -14,11 +16,34 @@ class CartPage extends StatefulWidget {
 
 class _CartPageState extends State<CartPage> {
   List<OrderDetails> item = [];
+  String coffeeName = 'a';
+
   // Adding order to cart
-void addItemsToCart(){
-  OrderDetails addOrder = widget.order as OrderDetails;
-item.add(addOrder);
-}
+  void addItemsToCart() {
+    OrderDetails addOrder = widget.order as OrderDetails;
+    item.add(addOrder);
+  }
+
+  getItemName() async {
+    OrderDetails myOrder = widget.order as OrderDetails;
+    int id = myOrder.id;
+    String name = myOrder.name;
+
+    try {
+      Coffee data = await CoffeeApiService.getCoffeeByName(name);
+      setState(() {
+        coffeeName = data.name;
+        print('Name of coffee ahshs is $coffeeName');
+      });
+    } catch (e) {}
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getItemName();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,15 +78,15 @@ item.add(addOrder);
               itemCount:
                   5, // Replace this with the actual number of items in the cart
               itemBuilder: (context, index) {
-                var myOrder =  widget.order as OrderDetails;
+                var myOrder = widget.order as OrderDetails;
                 return Padding(
                   padding:
                       const EdgeInsets.only(bottom: 12, left: 10, right: 16),
                   child: CartItemTile(
                     image:
                         'assets/images/coffee.png', // Replace this with the actual image URL or asset path
-                    name:
-                        myOrder.size, // Replace this with the actual coffee name
+                    name: myOrder
+                        .size, // Replace this with the actual coffee name
                     time: 30,
                     rating: 4,
                     description:
