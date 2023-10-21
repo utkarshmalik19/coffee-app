@@ -17,11 +17,14 @@ class CartPage extends StatefulWidget {
 class _CartPageState extends State<CartPage> {
   List<OrderDetails> item = [];
   String coffeeName = 'a';
+  
 
   // Adding order to cart
   void addItemsToCart() {
     OrderDetails addOrder = widget.order as OrderDetails;
-    item.add(addOrder);
+    setState(() {
+      item.add(addOrder);
+    });
   }
 
   getItemName() async {
@@ -42,6 +45,7 @@ class _CartPageState extends State<CartPage> {
     super.initState();
     getItemName();
     addItemsToCart();
+    
   }
 
   @override
