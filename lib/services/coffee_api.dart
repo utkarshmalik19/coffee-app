@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:coffee_app/models/coffee.dart';
+import 'package:coffee_app/models/order_details.dart';
 import 'package:coffee_app/utils/consts.dart';
 import 'package:http/http.dart' as http;
 
@@ -35,5 +36,11 @@ class CoffeeApiService {
     Coffee coffee = Coffee.fromJson(jsonDecode(response.body));
     print(coffee.name);
     return coffee;
+  }
+
+  // Add order to cart 
+  static Future<void> addCoffeeToCart() async{
+    final response = http.post(Uri.parse('$baseUri/order/add'));
+    //return response;
   }
 }
