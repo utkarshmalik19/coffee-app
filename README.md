@@ -1,7 +1,6 @@
 # coffee_app
 
-A new Flutter project.
-
+This is an online coffee shop app
 ## Getting Started
 
 This project is a starting point for a Flutter application.
