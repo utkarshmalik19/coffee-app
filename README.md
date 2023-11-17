@@ -1,16 +1,16 @@
 # coffee_app
 
-A new Flutter project.
+This is an online coffee shop app
+This app is developed using Flutter for the frontend and Spring Boot for the backend.
 
-## Getting Started
+Features
+Browse Menu: Explore a diverse menu featuring various coffee types, teas, desserts, and more.
 
-This project is a starting point for a Flutter application.
+Add to Cart: Easily add your favorite items to the cart for a seamless ordering experience.
 
-A few resources to get you started if this is your first Flutter project:
+Place Order: Place your order directly through the app for a convenient and quick service.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Technologies Used - 
+Frontend - Flutter and Dart
+Backend - Java and Spring Boot
+Database - Hibernate and MySql
