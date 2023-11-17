@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-String baseUri ="http://localhost:8080";  //Globally defined Url for backend
+String baseUri ="http://192.168.1.5:8080";  //Globally defined Url for backend
 class AppConstants {
 //Colors
 

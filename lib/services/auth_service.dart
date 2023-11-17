@@ -4,7 +4,7 @@ import 'package:coffee_app/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
-String uri = 'http://192.168.1.3:3000';
+String uri = 'http://192.168.1.5:8080';
 
 class AuthService {
   void SignUpUser({
