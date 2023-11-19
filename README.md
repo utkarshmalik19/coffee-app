@@ -1,6 +1,6 @@
 # coffee_app
 
-This is an online coffee shop app
+An online coffee shop app
 This app is developed using Flutter for the frontend and Spring Boot for the backend.
 
 Features
